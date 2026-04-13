@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - RideApp</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card" style="max-width: 500px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <i class="fa fa-car" style="font-size: 3rem; color: var(--primary);"></i>
+                <h2>Create Account</h2>
+                <p>Join RideApp today!</p>
+            </div>
+
+            <form id="registerForm" action="register.php" method="post">
+                <div class="form-group">
+                    <label><i class="fa fa-user"></i> Full Name</label>
+                    <input type="text" name="name" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa fa-envelope"></i> Email Address</label>
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa fa-phone"></i> Phone Number</label>
+                    <input type="tel" name="phone" placeholder="Enter your phone number" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa fa-lock"></i> Password</label>
+                    <input type="password" name="password" id="password" placeholder="Create password" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa fa-lock"></i> Confirm Password</label>
+                    <input type="password" id="confirm_password" placeholder="Confirm password" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa fa-users"></i> I want to</label>
+                    <select name="role" required>
+                        <option value="rider">Book Rides (Rider)</option>
+                        <option value="driver">Offer Rides (Driver)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fa fa-user-plus"></i> Register
+                </button>
+            </form>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <p>Already have an account? <a href="login.html" style="color: var(--primary);">Login here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hide loader
+        window.onload = function () {
+            setTimeout(function () {
+                document.getElementById("loader").style.opacity = "0";
+                setTimeout(function () {
+                    document.getElementById("loader").style.display = "none";
+                }, 500);
+            }, 500);
+        }
+
+        // Password confirmation
+        document.getElementById("registerForm").addEventListener("submit", function (e) {
+            const password = document.getElementById("password").value;
+            const confirm = document.getElementById("confirm_password").value;
+
+            if (password !== confirm) {
+                e.preventDefault();
+                alert("Passwords do not match!");
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Ride - RideApp</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa fa-car"></i> RideApp
+        </div>
+        <div class="nav-links">
+            <a href="dashboard.php"><i class="fa fa-home"></i> Home</a>
+            <a href="book_ride.html"><i class="fa fa-taxi"></i> Book Ride</a>
+            <a href="view_rides.php"><i class="fa fa-list"></i> My Rides</a>
+            <a href="logout.php"><i class="fa fa-sign-out"></i> Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card" style="max-width: 600px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <i class="fa fa-taxi" style="font-size: 3rem; color: var(--primary);"></i>
+                <h2>Book Your Ride</h2>
+                <p>Get where you need to go</p>
+            </div>
+
+            <form id="bookingForm" action="book_ride.php" method="post">
+                <div class="form-group">
+                    <label><i class="fa fa-map-marker-alt"></i> Pickup Location</label>
+                    <input type="text" name="pickup" id="pickup" placeholder="Enter pickup location" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa fa-flag-checkered"></i> Drop Location</label>
+                    <input type="text" name="drop" id="drop" placeholder="Enter destination" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa fa-car"></i> Vehicle Type</label>
+                    <select name="vehicle_type" id="vehicle_type">
+                        <option value="car">Standard Car (₹100 base)</option>
+                        <option value="suv">SUV (₹150 base)</option>
+                        <option value="auto">Auto (₹80 base)</option>
+                        <option value="bike">Bike (₹50 base)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa fa-credit-card"></i> Payment Method</label>
+                    <select name="payment_method">
+                        <option value="cash">Cash</option>
+                        <option value="card">Credit/Debit Card</option>
+                        <option value="wallet">Wallet (Balance: ₹0)</option>
+                    </select>
+                </div>
+
+                <div id="fareEstimate"
+                    style="background: #f0f0f0; padding: 15px; border-radius: 12px; margin-bottom: 20px; text-align: center;">
+                    <strong>Estimated Fare: <span id="estimatedFare">₹100</span></strong>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fa fa-check"></i> Confirm Booking
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                document.getElementById("loader").style.opacity = "0";
+                setTimeout(function () {
+                    document.getElementById("loader").style.display = "none";
+                }, 500);
+            }, 500);
+        }
+
+        // Dynamic fare estimation
+        const fareRates = {
+            car: 100,
+            suv: 150,
+            auto: 80,
+            bike: 50
+        };
+
+        document.getElementById('vehicle_type').addEventListener('change', function () {
+            const fare = fareRates[this.value];
+            document.getElementById('estimatedFare').innerText = '₹' + fare;
+        });
+
+        document.getElementById('bookingForm').addEventListener('submit', function (e) {
+            const pickup = document.getElementById('pickup').value;
+            const drop = document.getElementById('drop').value;
+
+            if (!pickup || !drop) {
+                e.preventDefault();
+                alert('Please enter both pickup and drop locations!');
+            }
+        });
+    </script>
+</body>
+
+</html>
