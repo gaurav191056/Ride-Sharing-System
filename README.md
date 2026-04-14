@@ -183,6 +183,11 @@ rideshare/
 
 ---
 
+## ⚙️ ER Diagram 
+![WhatsApp Image 2026-04-14 at 22 17 57](https://github.com/user-attachments/assets/c35c4731-4053-401f-971d-190dc4f42965)
+
+
+
 ## 🚀 Getting Started
 
 ### Prerequisites
